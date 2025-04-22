@@ -165,7 +165,9 @@ optgroup,
 #p-load-more:hover,
 #yt-load-more:hover,
 .list-body>div:hover,
-#ub-shortcuts>div:hover {
+#ub-shortcuts>div:hover,
+#yt-option-bar>button:hover,
+#yt-filter-bar>div>div>button:hover {
 	background: #404040;
 }
 
@@ -174,7 +176,9 @@ optgroup,
 #p-load-more:active,
 #yt-load-more:active,
 .list-body>div:active,
-#ub-shortcuts>div:active {
+#ub-shortcuts>div:active,
+#yt-option-bar>button:active,
+#yt-filter-bar>div>div>button:active {
 	background: #606060;
 }
 
@@ -240,6 +244,10 @@ optgroup,
 #like,
 #vlike {
 	background-image: url("res/thumb-up-w.svg");
+}
+
+#like[data-given] {
+	background-image: url("res/thumb-up-given-w.svg");
 }
 
 #share {

@@ -1067,7 +1067,7 @@ div.user[data-vip="diamond"]::after {
 	letter-spacing: 0px;
 }
 
-#addr:focus, #ub-option-bar>select:focus, #yt-option-bar>select:focus {
+#addr:focus, #ub-option-bar>select:focus, #yt-option-bar>select:focus, #yt-option-bar>button:focus {
 	border-color: #808080;
 }
 
@@ -1153,6 +1153,80 @@ div.user[data-vip="diamond"]::after {
 	margin: 20px auto 40px;
 }
 
+#yt-option-bar>button {
+	position: relative;
+	display: inline-block;
+	width: fit-content;
+	height: fit-content;
+	margin: 0px 5px;
+	padding: 1px 3px;
+	border: 1px solid #c0c0c0;
+	line-height: 20px;
+	letter-spacing: 0px;
+	vertical-align: top;
+}
+
+#yt-option-bar>button:hover, #yt-filter-bar>div>div>button:hover, #yt-load-more:hover, #p-load-more:hover, #loadmore:hover {
+	background: #f0f0f0;
+}
+
+#yt-option-bar>button:active, #yt-filter-bar>div>div>button:active, #yt-load-more:active, #p-load-more:active, #loadmore:active {
+	background: #e0e0e0;
+}
+
+#yt-filter-bar {
+	position: relative;
+	display: none;
+	width: calc(100% - 30px);
+	height: fit-content;
+	margin: 20px 0px 40px;
+	padding: 15px;
+	outline: 1px solid #808080;
+}
+
+#yt-filter-bar>div {
+	position: relative;
+	display: block;
+	width: fit-content;
+	height: fit-content;
+	margin: 10px 0px;
+	font-weight: 600;
+	line-height: 18px;
+	letter-spacing: 0px;
+}
+
+#yt-filter-bar>div>div {
+	position: relative;
+	display: block;
+	width: fit-content;
+	height: fit-content;
+	margin: 5px 0px;
+	font-weight: 500;
+	line-height: 16px;
+	letter-spacing: 0px;
+}
+
+#yt-filter-bar>div>div>button {
+	position: relative;
+	display: inline-block;
+	width: fit-content;
+	height: fit-content;
+	margin: 0px 2px;
+	padding: 3px;
+	border: 1px solid #c0c0c0;
+	cursor: pointer;
+	outline: none;
+	font-weight: 400;
+	line-height: 18px;
+	letter-spacing: 0px;
+}
+
+#yt-filter-bar>div>div>button[data-selected] {
+	font-weight: 600;
+	border-width: 2px;
+	border-color: #808080;
+}
+
 #yt-load-more, #p-load-more, #loadmore {
 	position: relative;
 	display: none;
@@ -1164,14 +1238,6 @@ div.user[data-vip="diamond"]::after {
 	outline: none;
 	border: 1px solid #808080;
 	border-radius: 25px;
-}
-
-#yt-load-more:hover, #p-load-more:hover, #loadmore:hover {
-	background: #f0f0f0;
-}
-
-#yt-load-more:active, #p-load-more:active, #loadmore:active {
-	background: #e0e0e0;
 }
 
 #startemu {
@@ -1289,6 +1355,18 @@ div.user[data-vip="diamond"]::after {
 	cursor: pointer;
 }
 
+#msglist>div[data-unread]::before {
+	position: absolute;
+	display: block;
+	width: 6px;
+	height: 6px;
+	top: 5px;
+	left: 35px;
+	content: "";
+	background: #ff0000;
+	border-radius: 5px;
+}
+
 #msglist>div>img {
 	position: absolute;
 	display: block;
@@ -1311,7 +1389,10 @@ div.user[data-vip="diamond"]::after {
 	font-size: 13px;
 	font-weight: 600;
 	line-height: 24px;
-	letter-spacing: 0px;
+	white-space: pre;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	overflow-wrap: break-word;
 }
 
 #history>div {
@@ -1325,7 +1406,7 @@ div.user[data-vip="diamond"]::after {
 #history>div>div {
 	position: absolute;
 	display: block;
-	width: 139px;
+	width: 174px;
 	height: 25px;
 	top: 5px;
 	left: 5px;
@@ -1339,7 +1420,7 @@ div.user[data-vip="diamond"]::after {
 
 #history>div>button {
 	position: absolute;
-	display: block;
+	display: none;
 	width: 35px;
 	height: 35px;
 	top: 0px;
@@ -1358,6 +1439,14 @@ div.user[data-vip="diamond"]::after {
 
 #history>div>button:active {
 	background-color: #ff0000;
+}
+
+#history>div:hover>div {
+	width: 139px;
+}
+
+#history>div:hover>button {
+	display: block;	
 }
 
 #newchat {
@@ -2048,7 +2137,7 @@ div.user[data-vip="diamond"]::after {
 	letter-spacing: 0px;
 }
 
-#ac-friends>div>span {
+#ac-friends>div>span, #grusers>div>span {
 	position: absolute;	
 	display: block;
 	width: 300px;
@@ -2475,11 +2564,15 @@ div.user[data-vip="diamond"]::after {
 	background-image: url("res/thumb-up.svg");
 }
 
+#like[data-given] {
+	background-image: url("res/thumb-up-given.svg");
+}
+
 #share {
 	background-image: url("res/share.svg");
 }
 
-#user, #seller {
+#user, #uploader, #puploader, #psubchannel {
 	position: relative;
 	display: block;
 	width: fit-content;
@@ -2487,7 +2580,7 @@ div.user[data-vip="diamond"]::after {
 	cursor: pointer;
 }
 
-#user>img, #seller>img {
+#user>img, #uploader>img, #puploader>img, #psubchannel>img {
 	position: relative;
 	display: inline-block;
 	width: 32px;
@@ -2499,7 +2592,7 @@ div.user[data-vip="diamond"]::after {
 	background: #ffffff;
 }
 
-#user>div, #seller>div {
+#user>div, #puploader>div, #psubchannel>div {
 	position: relative;
 	display: inline-block;
 	width: fit-content;
@@ -2510,6 +2603,38 @@ div.user[data-vip="diamond"]::after {
 	line-height: 20px;
 	letter-spacing: 0px;
 	vertical-align: top;
+}
+
+#uploader>div {
+	position: relative;
+	display: inline-block;
+	width: fit-content;
+	height: fit-content;
+	margin: 0px 2px;
+}
+
+#uploader>div>div {
+	position: relative;
+	display: block;
+	width: fit-content;
+	height: fit-content;
+	margin: 0px 0px 2px;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 15px;
+	letter-spacing: 0px;
+}
+
+#uploader>div>span {
+	position: relative;
+	display: block;
+	width: fit-content;
+	height: fit-content;
+	margin: 2px 0px 0px;
+	color: #808080;
+	font-size: 13px;
+	line-height: 15px;
+	letter-spacing: 0px;
 }
 
 #ecode {
@@ -2576,7 +2701,7 @@ div.user[data-vip="diamond"]::after {
 	background-image: url("res/view.svg");
 }
 
-#vdesc, #pdesc {
+#vdesc {
 	position: relative;
 	display: block;
 	width: 100%;
@@ -2595,6 +2720,16 @@ div.user[data-vip="diamond"]::after {
 	border: none;
 	object-fit: contain;
 	object-position: center;
+}
+
+#pprev {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: fit-content;
+	margin: 10px 0px;
+	object-fit: contain;
+	object-position: 0px 0px;
 }
 
 @media all and (max-width: 379px)  {

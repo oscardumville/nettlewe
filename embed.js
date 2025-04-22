@@ -1,1 +1,64 @@
-"use strict";(async({window:e,document:t})=>{"complete"!==t.readyState&&await new Promise((e=>{const o=()=>{"complete"===t.readyState&&(t.removeEventListener("readystatechange",o),setTimeout(e,500,null))};t.addEventListener("readystatechange",o,{passive:!0})}));const o=e.history,r=t.body,n=new DOMParser;if(null!=r&&"text/html"===t.contentType){r.textContent="Loading... (1)",await new Promise((e=>{setTimeout(e,1e3,null)})),r.textContent="Loading... (2)",e.stop(),e.focus(),o.scrollRestoration="manual",o.replaceState(void 0,"","/");try{const e=await fetch("/",{mode:"same-origin",cache:"no-cache",method:"GET",headers:{Accept:"text/html"}});if(!e.ok)throw new Error("Failed to fetch required resources");if("text/html"!==(e.headers.get("content-type")||"").split(";",2)[0].trim())throw new Error("Remote returned invalid response");const o=n.parseFromString(await e.text(),"application/xhtml+xml");o.title="NettleWeb",o.querySelector("script[src=\"main.js\"]").remove(),t.documentElement.replaceWith(o.documentElement);const r=o.createElement("script");r.type="text/javascript",r.src="main.js",t.body.appendChild(r)}catch(e){console.error(e),r.textContent="Error: Failed to load. Message: "+String(e)}}else console.error("Invalid document")})(self);
+"use strict"; (async ({ window: win, document: doc }) => {
+	if (doc.readyState !== "complete") {
+		await new Promise((resolve) => {
+			const callback = () => {
+				if (doc.readyState === "complete") {
+					doc.removeEventListener("readystatechange", callback);
+					setTimeout(resolve, 1000, null);
+				}
+			};
+			doc.addEventListener("readystatechange", callback, { passive: true });
+		});
+	}
+
+	const his = win.history;
+	const body = doc.body;
+	const parser = new DOMParser();
+
+	his.scrollRestoration = "manual";
+	his.replaceState(void 0, "", "/");
+
+	if (body != null && doc.contentType === "text/html") {
+		body.innerHTML = "Loading... (1)";
+		await new Promise((resolve) => {
+			setTimeout(resolve, 1000, null);
+		});
+
+		body.innerHTML = "Loading... (2)";
+		await new Promise((resolve) => {
+			setTimeout(resolve, 1000, null);
+		});
+
+		win.stop();
+		win.focus();
+		body.innerHTML = "Loading... (3)";
+
+		try {
+			const res = await fetch("/shop", {
+				mode: "same-origin",
+				cache: "no-cache",
+				method: "GET",
+				headers: {
+					"Accept": "application/xhtml+xml"
+				}
+			});
+			if (!res.ok || res.headers.get("content-type") !== "application/xhtml+xml")
+				throw new Error("Remote returned invalid response: " + res.status);
+
+			const d = parser.parseFromString(await res.text(), "application/xhtml+xml");
+			d.title = "NettleWeb";
+			d.querySelector("script[src=\"main.js\"]").remove();
+			doc.documentElement.replaceWith(d.documentElement);
+
+			const e = d.createElement("script");
+			e.src = "main.js";
+			e.type = "text/javascript";
+			e.async = true;
+			e.defer = true;
+			doc.body.appendChild(e);
+		} catch (err) {
+			console.error("Failed to initialize page content: ", err);
+			body.textContent = "Error: Failed to load page. Message: " + String(err);
+		}
+	} else console.error("Invalid document context");
+})(window);
